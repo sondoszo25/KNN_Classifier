@@ -1,3 +1,4 @@
+
 #include <string>
 #include "DefaultIO.h"
 using namespace std;
@@ -6,29 +7,23 @@ class Command
 {
 protected:
     string descrpiton;
-    DeafultIO dio();
-
+    SocketIO* dio;
 public:
-    virtual void Execute() const = 0;
+    Command();
+    virtual void Execute()=0;
     string getdescrption();
-};
-
-class Command1 : public Command
-{
 };
 
 class Command2 : public Command
 {
-};
-
-class Command3 : public Command
-{
-};
-
-class Command4 : public Command
-{
-};
-
-class Command5 : public Command
-{
+    private:
+    int k=5;
+    string typdis="AUC";
+    public:
+    void Execute();
+    Command2(SocketIO* t);
+    string getTypdis();
+     int    getK();
+     void setTypdis(string s);
+     void setK(int k1);
 };

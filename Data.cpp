@@ -199,6 +199,42 @@ int MakeData::makeInput()
             token2 = strtok(NULL, ".");
         }
     }
+
+       else if (flag9 == 36)
+    {
+        int count = 0;
+        char charArray2[input.length() + 1];
+        strcpy(charArray2, charArray);
+        char *token = strtok(charArray, " ");
+        while (token != NULL)
+        {
+            count++;
+            token = strtok(NULL, " ");
+        }
+        char *token2 = strtok(charArray2, " ");
+        if (count == 1)
+        {
+            flag1 = 1;
+            return 0;
+        }
+        while (count > 1 && token2 != NULL)
+        {
+            count--;
+            if (match(token2, myreg))
+            {
+                v.push_back(stod(token2));
+            }
+            else
+            {
+                flag1 = 1;
+                return 0;
+                break;
+            }
+            token2 = strtok(NULL, " ");
+        }
+        kind = token2;
+    }
+    
     if (flag1 == 1)
     {
         if (flag9 != 1)

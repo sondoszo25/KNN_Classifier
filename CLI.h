@@ -1,7 +1,8 @@
 #include "Command.h"
-class cli{
+class Cli{
 private:
 Command* c;
 public:
+Cli(Command*d);
 void start();
 };
