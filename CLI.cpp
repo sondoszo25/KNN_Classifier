@@ -1,10 +1,15 @@
 #include "CLI.h"
-
-void Cli::start(){
-    c->Execute();
+#include <iostream>
+void Cli::start(int i){
+    c[i-1]->Execute();
 }
 
-Cli::Cli(Command*d)
+Cli::Cli(DefaultIO* s)
 {
-    c=d;
+ t=s;
+ c[1]=new Command2(s);
+}
+
+Cli::~Cli(){
+    free(c[1]);
 }

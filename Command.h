@@ -1,13 +1,13 @@
 
 #include <string>
-#include "DefaultIO.h"
+#include "DefaultIOo.h"
 using namespace std;
 
 class Command
 {
 protected:
     string descrpiton;
-    SocketIO* dio;
+    DefaultIO* dio;
 public:
     Command();
     virtual void Execute()=0;
@@ -21,7 +21,7 @@ class Command2 : public Command
     string typdis="AUC";
     public:
     void Execute();
-    Command2(SocketIO* t);
+    Command2(DefaultIO* t);
     string getTypdis();
      int    getK();
      void setTypdis(string s);

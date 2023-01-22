@@ -1,6 +1,7 @@
 #include "Command.h"
 #include "Myvector.h"
 #include "Data.h"
+#include <iostream>
 
 Command::Command()
 {
@@ -25,7 +26,7 @@ int Command2::getK()
   return this->k;
 }
 
-Command2::Command2(SocketIO *t)
+Command2::Command2(DefaultIO *t)
 {
   this->dio = t;
   this->descrpiton = "2. algorithm settings";
@@ -40,6 +41,7 @@ void Command2::Execute()
   dio->write(output);
   string input;
   input = dio->read();
+  if(!input.empty()){
   string s;
   vector<double> v1;
   char delim[1];
@@ -60,8 +62,8 @@ void Command2::Execute()
   if (flag1==1 && flag==1)
   {
     k = data1.getVector().at(0);
-    cout<<"sondos"<<endl;
     typdis = data1.getString();
+    dio->write("valid");
     return;
   }
   else if (flag == 0 && flag1 == 0)
@@ -70,13 +72,13 @@ void Command2::Execute()
   }
   else if (flag == 0)
   {
-    output2 = "invaild valur for k";
+    output2 = "invaild value for k";
   }
   else
   {
     output2 = "invaild value for metric";
   }
-  //dio->write(output2);
+  dio->write(output2);
+  }
   return;
-  
 }

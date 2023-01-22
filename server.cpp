@@ -11,8 +11,8 @@
 #include <cstring>
 #include "Myvector.h"
 #include "Data.h"
-#include "DefaultIO.h"
-#include "Command.h"
+#include "DefaultIOo.h"
+#include "CLI.h"
 using namespace std;
 
 int main(int argc, char **argv)
@@ -78,38 +78,50 @@ int main(int argc, char **argv)
     if (client_sock < 0)
     {
         perror("error accepting client");
+        close(client_sock);
         continue;
     }
     else{
     int pid=fork();
     SocketIO sockio(client_sock);
+    Cli cli(&sockio);
     string input;
-    Command* array[5];
-    array[0]=new Command2(&sockio);
     int num;
-    string inputlist="Welcome to the KNN Classifier Server. Please choose an option:\n1. upload an unclassified csv data file\n2. algorithm settings";
+    string inputlist="Welcome to the KNN Classifier Server. Please choose an option:\n1. upload an unclassified csv data file\n2. algorithm settings\n3. classify data\n4. display results\n5. download results\n8. exit";
     if(pid ==0){
-           sockio.write(inputlist);
             if(!(sockio.getflag()))
             {
              close(client_sock);
              break;
             }
+            int num;
         while (1)
         {
-            input=sockio.read();
-            if(!(sockio.getflag()))
+            sockio.write(inputlist);
+            if(!sockio.getflag())
             {
-             close(client_sock);
-             break;
+                close(client_sock);
+                break;
             }
+             input=sockio.read();
+             if(!sockio.getflag())
+            {
+                close(client_sock);
+               break;
+            }
+            try{
             num=stod(input);
-            if(!(0<num && num<6))
+              if(!(0<num && num<6))
             {
-                sockio.write("invalid choice");
-                continue;
+              sockio.write("invalid choice");
+              continue;
             }
-            array[0]->Execute();
+            }
+            catch(exception e){
+              sockio.write("invalid choice");
+              continue;
+            }
+            cli.start(num);
         }
     }
     }

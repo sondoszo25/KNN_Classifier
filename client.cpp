@@ -11,7 +11,7 @@
 #include <cstring>
 #include "Myvector.h"
 #include "Data.h"
-#include "DefaultIO.h"
+#include "DefaultIOo.h"
 using namespace std;
 
 /******************
@@ -98,34 +98,57 @@ int main(int argc, char **argv)
     string choice;
     SocketIO socket(sock);
     string inputlist;
-    inputlist=socket.read();
     string input;
+    int num;
     while (1)
     {
-       cout<<inputlist<<endl;
-       getline(cin,choice);
-       if(choice == "8")
-       {
-        break;
-       }
-       socket.write(choice);
-        if(!(socket.getflag()))
-       {
-        break;
-       }
-         input=socket.read();
-         if(!(socket.getflag()))
-       {
-        break;
-       }
-       if(choice == "2"){
-        cout<<input<<endl;
-        string answer;
-        getline(cin,answer);
-        socket.write(answer);
-        continue;
-       }
-       cout<<input<<endl;
+        inputlist = socket.read();
+        if (!socket.getflag())
+        {
+            close(sock);
+            break;
+        }
+        std::cout << inputlist << endl;
+        getline(cin, choice);
+        if (choice == "8")
+        {
+            break;
+        }
+        socket.write(choice);
+        if (!socket.getflag())
+        {
+            close(sock);
+            break;
+        }
+        if(choice == "2")
+        {
+            input = socket.read();
+            cout<<input<<endl;
+            getline(cin, choice);
+            socket.write(choice);
+            if(choice.empty())
+            {
+               continue;
+            }
+            else{
+                input = socket.read();
+                if(input != "valid")
+                {
+                    cout<<input<<endl;
+                }
+                continue;
+            }
+
+        }
+        else{
+        input = socket.read();
+        if (!socket.getflag())
+        {
+            close(sock);
+            break;
+        }
+        std::cout << input << endl;
+        }
     }
     close(sock);
     return 0;

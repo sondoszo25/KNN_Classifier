@@ -1,8 +1,14 @@
 #include "Command.h"
+#include "DefaultIOo.h"
+
 class Cli{
 private:
-Command* c;
+int i;
+Command* c[5];
+DefaultIO* t;
+
 public:
-Cli(Command*d);
-void start();
+Cli(DefaultIO* s);
+void start(int i);
+~Cli();
 };
