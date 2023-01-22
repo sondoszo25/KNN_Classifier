@@ -22,6 +22,4 @@ SocketIO(int sockk);
 std::string read()override;
 void write(std::string s)override;
 };
-
-
 #endif

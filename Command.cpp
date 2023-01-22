@@ -82,3 +82,20 @@ void Command2::Execute()
   }
   return;
 }
+
+Command1::Command1(DefaultIO*t)
+{
+  //this->filevector=new Filevector();
+  dio=t;
+  this->descrpiton="upload an unclassified csv data file";
+}
+
+Command1::~Command1()
+{
+  //delete(filevector);
+}
+
+void Command1::Execute()
+{
+    dio->write("please upload your local train csv file.");
+}

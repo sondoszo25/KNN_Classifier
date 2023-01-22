@@ -12,6 +12,9 @@
 #include "Myvector.h"
 #include "Data.h"
 #include "DefaultIOo.h"
+#include <filesystem>
+#include <sstream>
+#include <fstream>
 using namespace std;
 
 /******************
@@ -120,34 +123,50 @@ int main(int argc, char **argv)
             close(sock);
             break;
         }
-        if(choice == "2")
+        else if (choice == "1")
         {
             input = socket.read();
-            cout<<input<<endl;
+            cout << input << endl;
+            getline(cin, choice);
+            ifstream ifs(choice); 
+            if (!ifs.is_open())
+            {
+                cout << " Failed to open" << endl;
+            }
+            else
+            {
+                cout << "Opened OK" << endl;
+            }
+        }
+        else if (choice == "2")
+        {
+            input = socket.read();
+            cout << input << endl;
             getline(cin, choice);
             socket.write(choice);
-            if(choice.empty())
+            if (choice.empty())
             {
-               continue;
+                continue;
             }
-            else{
+            else
+            {
                 input = socket.read();
-                if(input != "valid")
+                if (input != "valid")
                 {
-                    cout<<input<<endl;
+                    cout << input << endl;
                 }
                 continue;
             }
-
         }
-        else{
-        input = socket.read();
-        if (!socket.getflag())
+        else
         {
-            close(sock);
-            break;
-        }
-        std::cout << input << endl;
+            input = socket.read();
+            if (!socket.getflag())
+            {
+                close(sock);
+                break;
+            }
+            std::cout << input << endl;
         }
     }
     close(sock);

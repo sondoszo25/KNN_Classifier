@@ -1,6 +1,7 @@
 
 #include <string>
 #include "DefaultIOo.h"
+#include "Filesave.h"
 using namespace std;
 
 class Command
@@ -13,7 +14,15 @@ public:
     virtual void Execute()=0;
     string getdescrption();
 };
-
+class Command1:public Command
+{
+private:
+//Filevector* filevector;
+public:
+Command1(DefaultIO* t);
+void Execute();
+~Command1();
+};
 class Command2 : public Command
 {
     private:
