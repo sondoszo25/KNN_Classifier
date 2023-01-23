@@ -17,9 +17,10 @@ public:
 class Command1:public Command
 {
 private:
-//Filevector* filevector;
+Filevector* filevector;
 public:
 Command1(DefaultIO* t);
+Filevector* getf();
 void Execute();
 ~Command1();
 };
@@ -35,4 +36,22 @@ class Command2 : public Command
      int    getK();
      void setTypdis(string s);
      void setK(int k1);
+};
+
+
+class Command3 : public Command{
+private:
+Filevector* filevector;
+int k;
+string typdis;
+public:
+Command3(DefaultIO*t);
+void Execute();
+string getTypdis();
+int   getK();
+void setTypdis(string s);
+void setK(int k1);
+Filevector* getf();
+void setf(Filevector* s);
+
 };

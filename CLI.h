@@ -3,6 +3,9 @@
 
 class Cli{
 private:
+Command1* c1;
+Command2* c2;
+Command3* c3;
 int i;
 Command* c[5];
 DefaultIO* t;

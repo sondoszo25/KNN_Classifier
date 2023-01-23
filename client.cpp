@@ -14,6 +14,8 @@
 #include "DefaultIOo.h"
 #include <filesystem>
 #include <sstream>
+#include <sys/stat.h>
+
 #include <fstream>
 using namespace std;
 
@@ -127,16 +129,48 @@ int main(int argc, char **argv)
         {
             input = socket.read();
             cout << input << endl;
+            cin.clear();
             getline(cin, choice);
-            ifstream ifs(choice); 
+            ifstream ifs(choice); // note no mode needed
             if (!ifs.is_open())
             {
-                cout << " Failed to open" << endl;
+                cout << "invalid input" << endl;
+                socket.write("finish1");
             }
             else
             {
-                cout << "Opened OK" << endl;
+                string line;
+                while (getline(ifs, line))
+                {
+                    socket.write(line);
+                }
+                socket.write("finish");
+                input = socket.read();
+                cout << input << endl;
             }
+               input = socket.read();
+                cout << input << endl;
+                cin.clear();
+                getline(cin, choice);
+                ifstream ifss(choice); // note no mode needed
+                if (!ifss.is_open())
+                {
+                    cout << "invalid input" << endl;
+                    socket.write("finish1");
+                    continue;
+                }
+                else
+                {
+                    string line;
+                    while (getline(ifss, line))
+                    {
+                        socket.write(line);
+                    }
+                    socket.write("finish");
+                    input = socket.read();
+                    cout << input << endl;
+                }
+
         }
         else if (choice == "2")
         {
@@ -157,6 +191,11 @@ int main(int argc, char **argv)
                 }
                 continue;
             }
+        }
+        else if(choice == "3")
+        {
+            input = socket.read();
+            cout << input << endl;
         }
         else
         {

@@ -64,7 +64,24 @@ int MakeData::makeInput()
             }
         }
     }
-    if (flag9 == 0)
+    if (flag9 == 566)
+    {
+        char *token = strtok(charArray, ",");
+        while (token != NULL)
+        {
+            if (match(token, myreg))
+            {
+                v.push_back(stod(token));
+            }
+            else
+            {
+                flag1 = 1;
+                break;
+            }
+            token = strtok(NULL, ",");
+        }
+    }
+     if (flag9 == 0)
     {
         char *token = strtok(charArray, " ");
         while (token != NULL)

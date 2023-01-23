@@ -1,18 +1,24 @@
+#ifndef  filesave.h 
+#define  filesave.h 
+
+
 #include <list>
 #include <string>
 #include <iterator>
 using namespace std;
 class Filevector{
 private:
-list<string> vectorlist;
-list<string> Vectortest;
-list<string> classified;
+list<string>* vectorlist=new list<string>;
+list<string>* Vectortest=new list <string>;
+list<string>* classified=new list<string>;
 public:
 Filevector();
-void addvlist();
-void addvtest();
-void addc();
-list<string> getlistvector();
-list<string> getlistclass();
+void addvlist(string s);
+void addvtest(string s);
+void addc(std::string s);
+list<string>* getlistvector();
+list<string>* getlistclass();
+list<string>* getlisttest();
 ~Filevector();
 };
+#endif
