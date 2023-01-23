@@ -64,24 +64,22 @@ int MakeData::makeInput()
             }
         }
     }
-    if (flag9 == 566)
+    if (flag9 == 16)
     {
-        char *token = strtok(charArray, ",");
+        char *token = strtok(charArray,",");
         while (token != NULL)
         {
-            if (match(token, myreg))
-            {
+          try{
                 v.push_back(stod(token));
-            }
-            else
-            {
+          }
+          catch(exception e){
                 flag1 = 1;
                 break;
-            }
-            token = strtok(NULL, ",");
+          }
+            token = strtok(NULL,",");
         }
     }
-     if (flag9 == 0)
+    else if (flag9 == 0)
     {
         char *token = strtok(charArray, " ");
         while (token != NULL)
@@ -97,7 +95,8 @@ int MakeData::makeInput()
             }
             token = strtok(NULL, " ");
         }
-    }
+       }    
+
     else if (flag9 == 1)
     {
         int count = 0;
@@ -266,6 +265,7 @@ int MakeData::makeInput()
         {
             // cout << "v have invaild input" << endl;
         }
+
         return 0;
     }
     if (v.size() == 0)
@@ -274,6 +274,7 @@ int MakeData::makeInput()
         {
             // cout << " v is lenght 0 sorry!" << endl;
         }
+
         return 0;
     }
     return 1;

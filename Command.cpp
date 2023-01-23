@@ -206,20 +206,21 @@ void Command3::Execute()
     vector<double> v1;
     char delim[1];
     int flag89 = 0;
-    delim[0] = ' ';
-    MakeData data1(*i, delim, v1, 566, s);
+    delim[0] = ',';
+    MakeData data1(*i, delim, v1, 16, s);
     if (data1.makeInput() == 0)
     {
       continue;
-    } 
+    }
     int sizeVec = 0;
-      int indexMax = 0;
-      int indexFile = 0;
-      string line;
-      Vectors *vecArray = new Vectors[k];
+    int indexMax = 0;
+    int indexFile = 0;
+    string line;
+    Vectors *vecArray = new Vectors[k];
+    int ctest = 0;
     for (std::list<string>::iterator j = filevector->getlistvector()->begin(); j != filevector->getlistvector()->end(); ++j)
     {
-      
+
       if ((*j).length() == 0)
       {
         continue;
@@ -259,47 +260,83 @@ void Command3::Execute()
         continue;
       }
     }
-      Types *typesArray = new Types[sizeVec];
-      int sizeTypes = 0;
+    Types *typesArray = new Types[sizeVec];
+    int sizeTypes = 0;
 
-      for (int ii = 0; ii < sizeVec; ii++)
+    for (int ii = 0; ii < sizeVec; ii++)
+    {
+      if (ii == 0)
       {
-        if (ii == 0)
+        Types t(vecArray->getKind());
+        typesArray[0] = t;
+        sizeTypes++;
+        continue;
+      }
+      int flag12 = 0;
+      for (int jj = 0; jj < sizeTypes; jj++)
+      {
+        if (vecArray[ii].getKind() == typesArray[jj].getType())
         {
-          Types t(vecArray->getKind());
-          typesArray[0] = t;
-          sizeTypes++;
-          continue;
-        }
-        int flag12 = 0;
-        for (int jj = 0; jj < sizeTypes; jj++)
-        {
-          if (vecArray[ii].getKind() == typesArray[jj].getType())
-          {
-            typesArray[jj].incQuantity();
-            flag12 = 1;
-            break;
-          }
-        }
-        if (flag12 == 0)
-        {
-          Types t(vecArray[ii].getKind());
-          typesArray[sizeTypes] = t;
-          sizeTypes++;
+          typesArray[jj].incQuantity();
+          flag12 = 1;
+          break;
         }
       }
-      int maxIndexT = 0;
-      for (int jjj = 0; jjj < sizeTypes; jjj++)
+      if (flag12 == 0)
       {
-        if (typesArray[jjj].getQuantity() > typesArray[maxIndexT].getQuantity())
-        {
-          maxIndexT = jjj;
-        }
+        Types t(vecArray[ii].getKind());
+        typesArray[sizeTypes] = t;
+        sizeTypes++;
       }
-      filevector->addc(typesArray[maxIndexT].getType());
-      cout<<typesArray[maxIndexT].getType()<<endl;
-      delete[] typesArray;
-      delete[] vecArray;
+    }
+    int maxIndexT = 0;
+    for (int jjj = 0; jjj < sizeTypes; jjj++)
+    {
+      if (typesArray[jjj].getQuantity() > typesArray[maxIndexT].getQuantity())
+      {
+        maxIndexT = jjj;
+      }
+    }
+    filevector->addc(typesArray[maxIndexT].getType());
+    delete[] typesArray;
+    delete[] vecArray;
   }
   dio->write("classifying data complete");
+}
+
+void Command4::setf(Filevector *s)
+{
+  this->filevector = s;
+}
+
+Command4::Command4(DefaultIO *t)
+{
+  dio = t;
+  this->descrpiton = "display results";
+}
+
+void Command4::Execute()
+{
+  if (this->filevector != NULL)
+  {
+    if (filevector->getlisttest()->size() == 0 || filevector->getlistvector()->size() == 0)
+    {
+      dio->write("please upload data");
+      return;
+    }
+    if (filevector->getlistclass()->size() == 0)
+    {
+      dio->write("please classify the data");
+      return;
+    }
+     for (std::list<string>::iterator j = filevector->getlistclass()->begin(); j != filevector->getlistclass()->end(); ++j)
+    {
+       dio->write(*j);
+    }
+    dio->write("Done.");
+  }
+  else
+  {
+    dio->write("please upload data");
+  }
 }

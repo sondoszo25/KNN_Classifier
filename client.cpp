@@ -148,29 +148,28 @@ int main(int argc, char **argv)
                 input = socket.read();
                 cout << input << endl;
             }
-               input = socket.read();
+            input = socket.read();
+            cout << input << endl;
+            cin.clear();
+            getline(cin, choice);
+            ifstream ifss(choice); // note no mode needed
+            if (!ifss.is_open())
+            {
+                cout << "invalid input" << endl;
+                socket.write("finish1");
+                continue;
+            }
+            else
+            {
+                string line;
+                while (getline(ifss, line))
+                {
+                    socket.write(line);
+                }
+                socket.write("finish");
+                input = socket.read();
                 cout << input << endl;
-                cin.clear();
-                getline(cin, choice);
-                ifstream ifss(choice); // note no mode needed
-                if (!ifss.is_open())
-                {
-                    cout << "invalid input" << endl;
-                    socket.write("finish1");
-                    continue;
-                }
-                else
-                {
-                    string line;
-                    while (getline(ifss, line))
-                    {
-                        socket.write(line);
-                    }
-                    socket.write("finish");
-                    input = socket.read();
-                    cout << input << endl;
-                }
-
+            }
         }
         else if (choice == "2")
         {
@@ -192,10 +191,33 @@ int main(int argc, char **argv)
                 continue;
             }
         }
-        else if(choice == "3")
+        else if (choice == "3")
         {
             input = socket.read();
             cout << input << endl;
+        }
+        else if (choice == "4")
+        {
+            int count = 1;
+            while (1)
+            {
+                input = socket.read();
+                if (input == "Done.")
+                {
+                    cout << input << endl;
+                    break;
+                }
+                if (input == "please upload data" || input == "please classify the data")
+                {
+                    cout << input << endl;
+                      break;
+                }
+                else
+                {
+                    cout << count << "  " << input << endl;
+                    count++;
+                }
+            }
         }
         else
         {

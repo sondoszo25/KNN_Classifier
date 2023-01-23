@@ -82,11 +82,12 @@ int main(int argc, char **argv)
         continue;
     }
     else{
-    int pid=fork();
+    
     SocketIO sockio(client_sock);
     Cli cli(&sockio);
     string input;
     int num;
+    int pid=fork();
     string inputlist="Welcome to the KNN Classifier Server. Please choose an option:\n1. upload an unclassified csv data file\n2. algorithm settings\n3. classify data\n4. display results\n5. download results\n8. exit";
     if(pid ==0){
             if(!(sockio.getflag()))
