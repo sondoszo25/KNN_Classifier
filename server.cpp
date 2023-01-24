@@ -71,61 +71,77 @@ int main(int argc, char **argv)
         close(sock);
         perror("error listening to a socket");
     }
-    while(1){
-    struct sockaddr_in client_sin;
-    unsigned int addr_len = sizeof(client_sin);
-    int client_sock = accept(sock, (struct sockaddr *)&client_sin, &addr_len);
-    if (client_sock < 0)
+    while (1)
     {
-        perror("error accepting client");
-        close(client_sock);
-        continue;
-    }
-    else{
-    
-    SocketIO sockio(client_sock);
-    Cli cli(&sockio);
-    string input;
-    int num;
-    int pid=fork();
-    string inputlist="Welcome to the KNN Classifier Server. Please choose an option:\n1. upload an unclassified csv data file\n2. algorithm settings\n3. classify data\n4. display results\n5. download results\n8. exit";
-    if(pid ==0){
-            if(!(sockio.getflag()))
-            {
-             close(client_sock);
-             break;
-            }
-            int num;
-        while (1)
+        struct sockaddr_in client_sin;
+        unsigned int addr_len = sizeof(client_sin);
+        int client_sock = accept(sock, (struct sockaddr *)&client_sin, &addr_len);
+        if (client_sock < 0)
         {
-            sockio.write(inputlist);
-            if(!sockio.getflag())
-            {
-                close(client_sock);
-                break;
-            }
-             input=sockio.read();
-             if(!sockio.getflag())
-            {
-                close(client_sock);
-               break;
-            }
-            try{
-            num=stod(input);
-              if(!(0<num && num<6))
-            {
-              sockio.write("invalid choice");
-              continue;
-            }
-            }
-            catch(exception e){
-              sockio.write("invalid choice");
-              continue;
-            }
-            cli.start(num);
+            perror("error accepting client");
+            close(client_sock);
+            continue;
         }
-    }
-    }
+        else
+        {
+
+            SocketIO sockio(client_sock);
+            Cli cli(&sockio);
+            string input;
+            int num;
+            int pid = fork();
+            string inputlist = "Welcome to the KNN Classifier Server. Please choose an option:\n1. upload an unclassified csv data file\n2. algorithm settings\n3. classify data\n4. display results\n5. download results\n8. exit";
+            if (pid == 0)
+            {
+                if (!(sockio.getflag()))
+                {
+                    close(client_sock);
+                    break;
+                }
+                int num;
+                while (1)
+                {
+                    sockio.write(inputlist);
+                    if (!sockio.getflag())
+                    {
+                        close(client_sock);
+                        break;
+                    }
+                    input = sockio.read();
+                    if (!sockio.getflag())
+                    {
+                        close(client_sock);
+                        break;
+                    }
+                    try
+                    {
+                        num = stod(input);
+                        if (!(0 < num && num < 6))
+                        {
+                            sockio.write("invalid choice");
+                            continue;
+                        }
+                    }
+                    catch (exception e)
+                    {
+                        sockio.write("invalid choice");
+                        continue;
+                    }
+                    if(num != 5)
+                    {
+                    cli.start(num);
+                    }
+                    else if(num ==5){
+                     int ip2=fork();
+                     if(ip2==0){
+                    cli.start(num);
+                    return 0;
+                     }
+                    }
+                    
+                }
+            }
+        }
     }
     close(sock);
     return 0;

@@ -19,30 +19,41 @@
 #include <fstream>
 using namespace std;
 
-void download(SocketIO socket,string path)
+void download(SocketIO socket, string path)
 {
-              int count = 1;
-              string input;
-            while (1)
-            {
-                input = socket.read();
-                if (input == "Done.")
-                {
-                    cout << input << endl;
-                    break;
-                }
-                else if (input == "please upload data" || input == "please classify the data")
-                {
-                    cout << input << endl;
-                    break;
-                }
-                else
-                {
-                    cout<<"Why you do this"<<count<<endl;
-                    cout << count << "  " << input << endl;
-                    count++;
-                }
+    int count = 1;
+    string input;
+    ofstream myfile;
+    int flag=1;
+    myfile.open(path + "/results.txt");
+    if(!(myfile.is_open()))
+    {
+        cout<<"not open"<<endl;
+          flag=0;
+    }
+    while (1)
+    {
+        input = socket.read();
+        if (input == "Done.")
+        {
+             if(flag == 1){
+                myfile.close();
             }
+            break;
+        }
+        else if (input == "please upload data" || input == "please classify the data")
+        {
+            cout << input << endl;
+            break;
+        }
+        else
+        {
+            if(flag == 1){
+            myfile<< count << "  " << input << endl;
+            }
+            count++;
+        }
+    }
 }
 
 /******************
@@ -248,7 +259,9 @@ int main(int argc, char **argv)
         else if (choice == "5")
         {
             string path;
-           download(socket,path);
+            getline(cin, path);
+            thread t(download,socket,path);
+            t.detach();
             continue;
         }
         else
