@@ -73,7 +73,7 @@ void Command2::Execute()
     }
     else if (flag == 0 && flag1 == 0)
     {
-      output2 = "invaild value for metric and invaild valur for k";
+      output2 = "invaild value for metric and invaild value for k";
     }
     else if (flag == 0)
     {
@@ -105,7 +105,7 @@ void Command1::Execute()
   filevector->getlistvector()->clear();
   filevector->getlisttest()->clear();
   filevector->getlistclass()->clear();
-  dio->write("please upload your local train csv file.");
+  dio->write("Please upload your local train CSV file.");
   string read;
   while (1)
   {
@@ -124,7 +124,7 @@ void Command1::Execute()
       filevector->addvlist(read);
     }
   }
-  dio->write("please upload your local train csv file.");
+  dio->write("Please upload your local test CSV file.");
   while (1)
   {
     read = dio->read();
@@ -186,6 +186,7 @@ void Command3::setf(Filevector *s)
 
 void Command3::Execute()
 {
+
   if (filevector == nullptr)
   {
     dio->write("please upload data");
@@ -200,6 +201,7 @@ void Command3::Execute()
   {
     k = filevector->getlistvector()->size();
   }
+    filevector->getlistclass()->clear();
   for (std::list<string>::iterator i = filevector->getlisttest()->begin(); i != filevector->getlisttest()->end(); ++i)
   {
     string s;
@@ -316,6 +318,44 @@ Command4::Command4(DefaultIO *t)
 }
 
 void Command4::Execute()
+{
+  if (this->filevector != NULL)
+  {
+    if (filevector->getlisttest()->size() == 0 || filevector->getlistvector()->size() == 0)
+    {
+      dio->write("please upload data");
+      return;
+    }
+    if (filevector->getlistclass()->size() == 0)
+    {
+      dio->write("please classify the data");
+      return;
+    }
+     for (std::list<string>::iterator j = filevector->getlistclass()->begin(); j != filevector->getlistclass()->end(); ++j)
+    {
+       dio->write(*j);
+    }
+    dio->write("Done.");
+  }
+  else
+  {
+    dio->write("please upload data");
+  }
+}
+
+Command5::Command5(DefaultIO *t)
+{
+  dio = t;
+  this->descrpiton = "download results";
+}
+
+void Command5::setf(Filevector *s)
+{
+  this->filevector = s;
+}
+
+
+void Command5::Execute()
 {
   if (this->filevector != NULL)
   {

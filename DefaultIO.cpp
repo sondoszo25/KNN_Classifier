@@ -13,45 +13,42 @@
 #include "Myvector.h"
 #include "Data.h"
 
-
-bool DefaultIO::getflag(){
+bool DefaultIO::getflag()
+{
     return this->stat;
 }
 
 SocketIO::SocketIO(int sockk)
 {
-  this->sock=sockk;
+    this->sock = sockk;
 }
-DefaultIO::DefaultIO(){
-    
+DefaultIO::DefaultIO()
+{
 }
-void SocketIO:: write(std::string s) {
-                char buffer[4096];
-                int expected_data_len = sizeof(buffer);
-                memset(buffer, 0, expected_data_len * (sizeof buffer[0]));
-                strcpy(buffer,s.c_str());
-               int sent_bytes = send(sock, buffer, expected_data_len, 0);
-                if (sent_bytes < 0)
-                {
-                 this->stat=false;
-                 }
-           
+void SocketIO::write(std::string s)
+{
+    int expected_data_len = sizeof(buffer);
+    memset(buffer, 0, expected_data_len * (sizeof buffer[0]));
+    strcpy(buffer, s.c_str());
+    int sent_bytes = send(sock, buffer, expected_data_len, 0);
+    if (sent_bytes < 0)
+    {
+        this->stat = false;
+    }
 }
 
-std::string SocketIO::read(){
-                char buffer[4096];
-                int expected_data_len = sizeof(buffer);
-            memset(buffer, 0, expected_data_len * (sizeof buffer[0]));
-            int read_bytes = recv(sock, buffer, expected_data_len, 0);
-               if (read_bytes == 0)
-            {
-                stat=false;
-            }
-            else if (read_bytes < 0)
-            {
-                stat=false;
-                
-            }
-          return buffer;
-            
+std::string SocketIO::read()
+{
+    int expected_data_len = sizeof(buffer);
+    memset(buffer, 0, expected_data_len * (sizeof buffer[0]));
+    int read_bytes = recv(sock, buffer, expected_data_len, 0);
+    if (read_bytes == 0)
+    {
+        stat = false;
+    }
+    else if (read_bytes < 0)
+    {
+        stat = false;
+    }
+    return buffer;
 }

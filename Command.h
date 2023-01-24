@@ -69,3 +69,13 @@ public:
     void Execute();
     void setf(Filevector *s);
 };
+
+class Command5:public Command{
+
+private:
+    Filevector *filevector;
+public:
+  Command5(DefaultIO *t);
+  void Execute();
+  void setf(Filevector *s);
+};

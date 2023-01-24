@@ -1,5 +1,5 @@
-#ifndef  DefaultIOo.h 
-#define  DefaultIOo.h 
+#ifndef  DefaultIOo
+#define  DefaultIOo
 #include <string>
 #include <stdbool.h>
 
@@ -7,6 +7,7 @@
 
 class DefaultIO{
 protected:
+    char buffer[4096];
 bool stat=true;
 int sock;
 public:
