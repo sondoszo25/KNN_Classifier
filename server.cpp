@@ -14,7 +14,12 @@
 #include "DefaultIOo.h"
 #include "CLI.h"
 using namespace std;
-
+/******************
+ * Function Name: main
+ * Input: int argc, char **argv
+ * Output: int
+ * Function Operation: server main
+ ******************/
 int main(int argc, char **argv)
 {
     if (argc != 2)
@@ -127,9 +132,8 @@ int main(int argc, char **argv)
                         sockio.write("invalid choice");
                         continue;
                     }
-                   
-                        cli.start(num);
-                    
+
+                    cli.start(num);
                 }
                 close(client_sock);
                 return 0;

@@ -1,5 +1,11 @@
 #include "CLI.h"
 #include <iostream>
+/******************
+ * Function Name: start
+ * Input: int i
+ * Output: void
+ * Function Operation: starts command i
+ ******************/
 void Cli::start(int i)
 {
 
@@ -19,7 +25,12 @@ void Cli::start(int i)
     }
     c[i - 1]->Execute();
 }
-
+/******************
+ * Function Name: cli ctor
+ * Input: defaultIO ptr
+ * Output: cli
+ * Function Operation: ctor, initializing array of pointers to commands
+ ******************/
 Cli::Cli(DefaultIO *s)
 {
     t = s;
@@ -34,7 +45,12 @@ Cli::Cli(DefaultIO *s)
     c[3] = c44;
     c[4] = c5;
 }
-
+/******************
+ * Function Name: cli dtor
+ * Input: none
+ * Output:
+ * Function Operation: deleting cli
+ ******************/
 Cli::~Cli()
 {
     delete (c1);

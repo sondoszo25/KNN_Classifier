@@ -12,19 +12,41 @@
 #include <cstring>
 #include "Myvector.h"
 #include "Data.h"
-
+/******************
+ * Function Name: getflag
+ * Input: none
+ * Output: bool
+ * Function Operation: geting flag value
+ ******************/
 bool DefaultIO::getflag()
 {
     return this->stat;
 }
-
+/******************
+ * Function Name: socketIO ctor
+ * Input: int sock
+ * Output: socketIO
+ * Function Operation: ctor
+ ******************/
 SocketIO::SocketIO(int sockk)
 {
     this->sock = sockk;
 }
+/******************
+ * Function Name: default ctor
+ * Input: none
+ * Output: DefaultIO
+ * Function Operation:
+ ******************/
 DefaultIO::DefaultIO()
 {
 }
+/******************
+ * Function Name: write
+ * Input: string
+ * Output: void
+ * Function Operation: write to the reciver
+ ******************/
 void SocketIO::write(std::string s)
 {
     int expected_data_len = sizeof(buffer);
@@ -36,7 +58,12 @@ void SocketIO::write(std::string s)
         this->stat = false;
     }
 }
-
+/******************
+ * Function Name: read
+ * Input: none
+ * Output: string
+ * Function Operation: read from sender
+ ******************/
 std::string SocketIO::read()
 {
     int expected_data_len = sizeof(buffer);
