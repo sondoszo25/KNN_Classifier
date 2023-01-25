@@ -3,36 +3,72 @@
 #include "Data.h"
 #include <iostream>
 #include "Filesave.h"
-
+/******************
+* Function Name: default ctor
+* Input: none
+* Output: none
+* Function Operation: ctor for command
+******************/
 Command::Command()
 {
 }
+/******************
+* Function Name: command2.setK()
+* Input: int k
+* Output: void
+* Function Operation: set k = num of neighbours.
+******************/
 void Command2::setK(int k1)
 {
   this->k = k1;
 }
-
+/******************
+* Function Name: command2.setTypdis
+* Input: string
+* Output: void
+* Function Operation: set string
+******************/
 void Command2::setTypdis(string s)
 {
   this->typdis = s;
 }
-
+/******************
+* Function Name: getTypdis()
+* Input: none
+* Output: string
+* Function Operation:  return string type
+******************/
 string Command2::getTypdis()
 {
   return this->typdis;
 }
-
+/******************
+* Function Name: getK
+* Input: none
+* Output: int 
+* Function Operation: returns k
+******************/
 int Command2::getK()
 {
   return this->k;
 }
-
+/******************
+* Function Name: command2 ctor
+* Input: DefaultIO
+* Output: command2
+* Function Operation: ctor
+******************/
 Command2::Command2(DefaultIO *t)
 {
   this->dio = t;
   this->descrpiton = "2. algorithm settings";
 }
-
+/******************
+* Function Name: execute
+* Input: none
+* Output: void
+* Function Operation: executing command2
+******************/
 void Command2::Execute()
 {
   string output = "The current KNN parameters are: K = ";
@@ -73,11 +109,11 @@ void Command2::Execute()
     }
     else if (flag == 0 && flag1 == 0)
     {
-      output2 = "invaild value for metric and invaild value for k";
+      output2 = "invaild value for metric and invaild value for K";
     }
     else if (flag == 0)
     {
-      output2 = "invaild value for k";
+      output2 = "invaild value for K";
     }
     else
     {
@@ -87,19 +123,34 @@ void Command2::Execute()
   }
   return;
 }
-
+/******************
+* Function Name: command1 ctor
+* Input: DefaultIO
+* Output: command1
+* Function Operation: ctor for command1
+******************/
 Command1::Command1(DefaultIO *t)
 {
   this->filevector = new Filevector();
   dio = t;
   this->descrpiton = "upload an unclassified csv data file";
 }
-
+/******************
+* Function Name: command1 dtor
+* Input: none
+* Output: 
+* Function Operation: deleting command1
+******************/
 Command1::~Command1()
 {
   delete (filevector);
 }
-
+/******************
+* Function Name: execute
+* Input: none
+* Output: void
+* Function Operation: command1 execute
+******************/
 void Command1::Execute()
 {
   flag3 = 0;
@@ -144,47 +195,93 @@ void Command1::Execute()
     }
   }
 }
+/******************
+* Function Name: 
+* Input:
+* Output:
+* Function Operation:
+******************/
 Filevector *Command1::getf()
 {
   return this->filevector;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 Filevector *Command3::getf()
 {
   return this->filevector;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 Command3::Command3(DefaultIO *t)
 {
   dio = t;
   this->descrpiton = "classify data";
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command3::setK(int k1)
 {
   this->k = k1;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command3::setTypdis(string s)
 {
   this->typdis = s;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 string Command3::getTypdis()
 {
   return this->typdis;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 int Command3::getK()
 {
   return this->k;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command3::setf(Filevector *s)
 {
   this->filevector = s;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command3::Execute()
 {
 
@@ -308,18 +405,33 @@ void Command3::Execute()
   }
   dio->write("classifying data complete");
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command4::setf(Filevector *s)
 {
   this->filevector = s;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 Command4::Command4(DefaultIO *t)
 {
   dio = t;
   this->descrpiton = "display results";
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command4::Execute()
 {
   if (this->filevector != NULL)
@@ -346,18 +458,33 @@ void Command4::Execute()
     dio->write("please upload data");
   }
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 Command5::Command5(DefaultIO *t)
 {
   dio = t;
   this->descrpiton = "download results";
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command5::setf(Filevector *s)
 {
   this->filevector = s;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command5::Execute()
 {
   if (this->filevector != NULL)
@@ -380,16 +507,32 @@ void Command5::Execute()
     dio->write("please upload data");
   }
 }
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 int Command3::getflag()
 {
   return this->flag3;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command4::setflag(int f)
 {
   this->flag3 = f;
 }
-
+/******************
+* Function Name:
+* Input:
+* Output:
+* Function Operation:
+******************/
 void Command5::setflag(int f)
 {
   this->flag3 = f;
