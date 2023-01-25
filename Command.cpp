@@ -302,6 +302,7 @@ void Command3::Execute()
       }
     }
     filevector->addc(typesArray[maxIndexT].getType());
+    dio->write(typesArray[maxIndexT].getType());
     delete[] typesArray;
     delete[] vecArray;
   }
@@ -371,10 +372,6 @@ void Command5::Execute()
 
       dio->write("please classify the data");
       return;
-    }
-    for (std::list<string>::iterator j = filevector->getlistclass()->begin(); j != filevector->getlistclass()->end(); ++j)
-    {
-      dio->write(*j);
     }
     dio->write("Done.");
   }

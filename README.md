@@ -21,11 +21,11 @@ else,  executes the command with index choise.
 in case the k is bigger than the file size we calculate all the file.
 in case ip address or port  the client prints invalid and close.
 in case port not vaild the server print invaild and close.
-in first command if the first file is invalid we continue to get the input for the second file but we don't replace them
+in first command if the first file is invalid we continue to get the input for the second file but we  replace them to empty files
 with the old files.(if one of the files is invalid we dont replace the old files).
 in 5th command we take the path of folder which the user wants to save the result file in, and we create
 file results.txt and write the results into it. also if couldn't open file the thread print file not open after the menu.
-
+in 2nd command if one of the inputs(k/metric) is wrong we don't replace any of them.
 
 vectors with differnt length we calculate the distance accroding to shortest.
 we accept scientific notaion numbers.

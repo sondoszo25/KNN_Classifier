@@ -245,8 +245,6 @@ int MakeData::makeInput()
             else
             {
                 flag1 = 1;
-                return 0;
-                break;
             }
             token2 = strtok(NULL, " ");
         }
