@@ -19,12 +19,14 @@ class Command1 : public Command
 {
 private:
     Filevector *filevector;
+    int flag3;
 
 public:
     Command1(DefaultIO *t);
     Filevector *getf();
     void Execute();
     ~Command1();
+    void setflag(int f);
 };
 class Command2 : public Command
 {
@@ -47,6 +49,7 @@ private:
     Filevector *filevector;
     int k;
     string typdis;
+    int flag3 = 0;
 
 public:
     Command3(DefaultIO *t);
@@ -57,25 +60,31 @@ public:
     void setK(int k1);
     Filevector *getf();
     void setf(Filevector *s);
+    int getflag();
 };
 
 class Command4 : public Command
 {
 private:
     Filevector *filevector;
+    int flag3;
 
 public:
     Command4(DefaultIO *t);
     void Execute();
     void setf(Filevector *s);
+    void setflag(int f);
 };
 
-class Command5:public Command{
-
+class Command5 : public Command
+{
 private:
     Filevector *filevector;
+    int flag3;
+
 public:
-  Command5(DefaultIO *t);
-  void Execute();
-  void setf(Filevector *s);
+    Command5(DefaultIO *t);
+    void Execute();
+    void setf(Filevector *s);
+    void setflag(int f);
 };

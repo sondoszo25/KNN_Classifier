@@ -24,19 +24,20 @@ void download(SocketIO socket, string path)
     int count = 1;
     string input;
     ofstream myfile;
-    int flag=1;
+    int flag = 1;
     myfile.open(path + "/results.txt");
-    if(!(myfile.is_open()))
+    if (!(myfile.is_open()))
     {
-        cout<<"not open"<<endl;
-          flag=0;
+        cout << "not open" << endl;
+        flag = 0;
     }
     while (1)
     {
         input = socket.read();
         if (input == "Done.")
         {
-             if(flag == 1){
+            if (flag == 1)
+            {
                 myfile.close();
             }
             break;
@@ -48,8 +49,9 @@ void download(SocketIO socket, string path)
         }
         else
         {
-            if(flag == 1){
-            myfile<< count << "  " << input << endl;
+            if (flag == 1)
+            {
+                myfile << count << "  " << input << endl;
             }
             count++;
         }
@@ -260,7 +262,7 @@ int main(int argc, char **argv)
         {
             string path;
             getline(cin, path);
-            thread t(download,socket,path);
+            thread t(download, socket, path);
             t.detach();
             continue;
         }

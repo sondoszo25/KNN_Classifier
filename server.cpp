@@ -127,18 +127,19 @@ int main(int argc, char **argv)
                         sockio.write("invalid choice");
                         continue;
                     }
-                    if(num != 5)
+                    if (num != 5)
                     {
-                    cli.start(num);
+                        cli.start(num);
                     }
-                    else if(num ==5){
-                     int ip2=fork();
-                     if(ip2==0){
-                    cli.start(num);
-                    return 0;
-                     }
+                    else if (num == 5)
+                    {
+                        int ip2 = fork();
+                        if (ip2 == 0)
+                        {
+                            cli.start(num);
+                            return 0;
+                        }
                     }
-                    
                 }
             }
         }

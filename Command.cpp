@@ -102,6 +102,7 @@ Command1::~Command1()
 
 void Command1::Execute()
 {
+  flag3 = 0;
   filevector->getlistvector()->clear();
   filevector->getlisttest()->clear();
   filevector->getlistclass()->clear();
@@ -201,7 +202,8 @@ void Command3::Execute()
   {
     k = filevector->getlistvector()->size();
   }
-    filevector->getlistclass()->clear();
+  filevector->getlistclass()->clear();
+  this->flag3 = 1;
   for (std::list<string>::iterator i = filevector->getlisttest()->begin(); i != filevector->getlisttest()->end(); ++i)
   {
     string s;
@@ -329,11 +331,12 @@ void Command4::Execute()
     if (filevector->getlistclass()->size() == 0)
     {
       dio->write("please classify the data");
+
       return;
     }
-     for (std::list<string>::iterator j = filevector->getlistclass()->begin(); j != filevector->getlistclass()->end(); ++j)
+    for (std::list<string>::iterator j = filevector->getlistclass()->begin(); j != filevector->getlistclass()->end(); ++j)
     {
-       dio->write(*j);
+      dio->write(*j);
     }
     dio->write("Done.");
   }
@@ -354,7 +357,6 @@ void Command5::setf(Filevector *s)
   this->filevector = s;
 }
 
-
 void Command5::Execute()
 {
   if (this->filevector != NULL)
@@ -366,12 +368,13 @@ void Command5::Execute()
     }
     if (filevector->getlistclass()->size() == 0)
     {
+
       dio->write("please classify the data");
       return;
     }
-     for (std::list<string>::iterator j = filevector->getlistclass()->begin(); j != filevector->getlistclass()->end(); ++j)
+    for (std::list<string>::iterator j = filevector->getlistclass()->begin(); j != filevector->getlistclass()->end(); ++j)
     {
-       dio->write(*j);
+      dio->write(*j);
     }
     dio->write("Done.");
   }
@@ -379,4 +382,18 @@ void Command5::Execute()
   {
     dio->write("please upload data");
   }
+}
+int Command3::getflag()
+{
+  return this->flag3;
+}
+
+void Command4::setflag(int f)
+{
+  this->flag3 = f;
+}
+
+void Command5::setflag(int f)
+{
+  this->flag3 = f;
 }

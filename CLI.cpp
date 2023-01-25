@@ -2,6 +2,7 @@
 #include <iostream>
 void Cli::start(int i)
 {
+
     if (i == 3)
     {
         c3->setK(c2->getK());
@@ -12,9 +13,9 @@ void Cli::start(int i)
     {
         c44->setf(c1->getf());
     }
-    if(i == 5)
+    if (i == 5)
     {
-             c5->setf(c1->getf());   
+        c5->setf(c1->getf());
     }
     c[i - 1]->Execute();
 }
@@ -31,14 +32,14 @@ Cli::Cli(DefaultIO *s)
     c[1] = c2;
     c[2] = c3;
     c[3] = c44;
-    c[4]=c5;
+    c[4] = c5;
 }
 
 Cli::~Cli()
 {
- delete(c1);
- delete(c2);
- delete(c3);
- delete(c44);
- delete(c5);
+    delete (c1);
+    delete (c2);
+    delete (c3);
+    delete (c44);
+    delete (c5);
 }

@@ -66,17 +66,19 @@ int MakeData::makeInput()
     }
     if (flag9 == 16)
     {
-        char *token = strtok(charArray,",");
+        char *token = strtok(charArray, ",");
         while (token != NULL)
         {
-          try{
+            try
+            {
                 v.push_back(stod(token));
-          }
-          catch(exception e){
+            }
+            catch (exception e)
+            {
                 flag1 = 1;
                 break;
-          }
-            token = strtok(NULL,",");
+            }
+            token = strtok(NULL, ",");
         }
     }
     else if (flag9 == 0)
@@ -95,7 +97,7 @@ int MakeData::makeInput()
             }
             token = strtok(NULL, " ");
         }
-       }    
+    }
 
     else if (flag9 == 1)
     {
@@ -216,7 +218,7 @@ int MakeData::makeInput()
         }
     }
 
-       else if (flag9 == 36)
+    else if (flag9 == 36)
     {
         int count = 0;
         char charArray2[input.length() + 1];
@@ -250,7 +252,7 @@ int MakeData::makeInput()
         }
         kind = token2;
     }
-    
+
     if (flag1 == 1)
     {
         if (flag9 != 1)
